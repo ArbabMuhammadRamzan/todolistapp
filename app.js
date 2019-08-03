@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 // Making Two Global Varaibles
+const date = require(__dirname + "/date.js");
 var past = ["Spicy Food","Desy Food","Fast Food"];
 var workPast = [];
 //Setting Engine
@@ -11,13 +12,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 // Apply Request
 app.get("/", function(req, res){
-  var myDate = new Date();
-  var options = {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-  }
-  var today = myDate.toLocaleDateString("en-US", options);
+  var today = date.getDate();
   res.render("file", {head: today, liItem: past});
 });
 app.post("/", function(req, res){
